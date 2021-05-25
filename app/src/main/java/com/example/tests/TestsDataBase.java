@@ -16,12 +16,14 @@ public class TestsDataBase  extends SQLiteOpenHelper {
     public static final String TESTS_TITLE="title";
 
     public static final String QUESTIONS="questions";
-    public static final String QUESTIONS_ID="questions_id";
+    public static final String QUESTIONS_ID="_id";
+    public static final String TEST_ID="test_id";
     public static final String QUESTION="question";
 
     public static final String ANSWERS="answers";
-    public static final String ANSWERS_ID="answers_id";
+    public static final String ANSWERS_ID="_id";
     public static final String ANSWER="answer";
+    public static final String QUESTION_ID="question_id";
     public static final String SCORE="score";
 
 
@@ -31,8 +33,8 @@ public class TestsDataBase  extends SQLiteOpenHelper {
 
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table " + TESTS + "(" + TESTS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + TESTS_TITLE + " TEXT" + ")");
-        db.execSQL("create table "+ QUESTIONS + "(" + QUESTIONS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + QUESTION + "TEXT," + TESTS_ID + "INTEGER" +")");
-        db.execSQL("create table "+ ANSWERS +"(" + ANSWERS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ANSWER + "TEXT," + SCORE +"INTEGER," + QUESTIONS_ID + "INTEGER" +")");
+        db.execSQL("create table "+ QUESTIONS + "(" + QUESTIONS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + QUESTION + " TEXT," + TEST_ID + " INTEGER" +")");
+        db.execSQL("create table "+ ANSWERS +"(" + ANSWERS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ANSWER + " TEXT," + SCORE +" INTEGER," + QUESTION_ID + " INTEGER" +")");
 
 
     }

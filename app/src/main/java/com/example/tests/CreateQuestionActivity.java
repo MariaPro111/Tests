@@ -2,6 +2,7 @@ package com.example.tests;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -36,12 +37,15 @@ public class CreateQuestionActivity extends AppCompatActivity {
                 SQLiteDatabase database = testsdb.getWritableDatabase();
                 ContentValues contentValues = new ContentValues();
                 contentValues.put(TestsDataBase.QUESTION, question);
-                contentValues.put(TestsDataBase.TESTS_ID, id);
+                contentValues.put(TestsDataBase.TEST_ID, id);
                 database.insert(TestsDataBase.QUESTIONS, null, contentValues);
+                Cursor c=database.rawQuery("SELECT MAX(_id) as max_id FROM questions", null);
+                int idIndex = c.getColumnIndex("max_id");
                 database.close();
 
                 Intent intent = new Intent();
-                intent.setClass(CreateQuestionActivity.this, AddQuestionActivity.class);
+                intent.setClass(CreateQuestionActivity.this, CreateAnswerActivity.class);
+                intent.putExtra("questionid", idIndex);
                 startActivity(intent);
 
             }

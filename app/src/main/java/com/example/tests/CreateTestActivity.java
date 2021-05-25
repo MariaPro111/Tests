@@ -36,8 +36,8 @@ public class CreateTestActivity extends AppCompatActivity {
                 contentValues.put(TestsDataBase.TESTS_TITLE, title);
                 database.insert(TestsDataBase.TESTS, null, contentValues);
 
-                Cursor c=database.rawQuery("SELECT MAX(_ID) FROM tests", null);
-                int idIndex = c.getColumnIndex("_ID");
+                Cursor c=database.rawQuery("SELECT MAX(_ID) as max_id FROM tests", null);
+                int idIndex = c.getColumnIndex("max_id");
                 database.close();
 
 

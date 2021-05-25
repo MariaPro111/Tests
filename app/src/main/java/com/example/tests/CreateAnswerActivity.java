@@ -23,6 +23,8 @@ public class CreateAnswerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createanswer);
 
+        Bundle arguments = getIntent().getExtras();
+
         TestsDataBase testsdb = new TestsDataBase(this);
         button3 = (Button) findViewById(R.id.button3);
         editAnswer1 = (EditText) findViewById(R.id.editAnswer1);
@@ -35,25 +37,26 @@ public class CreateAnswerActivity extends AppCompatActivity {
                 String answer1=editAnswer1.getText().toString();
                 String answer2=editAnswer2.getText().toString();
                 String answer3=editAnswer3.getText().toString();
+                int id = arguments.getInt("questionid");
 
                 SQLiteDatabase database = testsdb.getWritableDatabase();
                 ContentValues contentValues1 = new ContentValues();
-                contentValues1.put(TestsDataBase.ANSWERS, answer1);
+                contentValues1.put(TestsDataBase.ANSWER, answer1);
                 contentValues1.put(TestsDataBase.SCORE, 2);
-                contentValues1.put(TestsDataBase.QUESTIONS_ID, ?);
-                database.insert(TestsDataBase.QUESTIONS, null, contentValues1);
+                contentValues1.put(TestsDataBase.QUESTION_ID, id);
+                database.insert(TestsDataBase.ANSWERS, null, contentValues1);
 
                 ContentValues contentValues2 = new ContentValues();
-                contentValues2.put(TestsDataBase.ANSWERS, answer2);
+                contentValues2.put(TestsDataBase.ANSWER, answer2);
                 contentValues2.put(TestsDataBase.SCORE, 1);
-                contentValues2.put(TestsDataBase.QUESTIONS_ID, ?);
-                database.insert(TestsDataBase.QUESTIONS, null, contentValues2);
+                contentValues2.put(TestsDataBase.QUESTION_ID, id);
+                database.insert(TestsDataBase.ANSWERS, null, contentValues2);
 
                 ContentValues contentValues3 = new ContentValues();
-                contentValues3.put(TestsDataBase.ANSWERS, answer3);
+                contentValues3.put(TestsDataBase.ANSWER, answer3);
                 contentValues3.put(TestsDataBase.SCORE, 0);
-                contentValues3.put(TestsDataBase.QUESTIONS_ID, ?);
-                database.insert(TestsDataBase.QUESTIONS, null, contentValues3);
+                contentValues3.put(TestsDataBase.QUESTION_ID, id);
+                database.insert(TestsDataBase.ANSWERS, null, contentValues3);
 
 
                 database.close();
