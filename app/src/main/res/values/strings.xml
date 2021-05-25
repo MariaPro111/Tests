@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Tests</string>
+    <string name="create">Создать опрос</string>
+    <string name="take">Пройти опрос</string>
+    <string name="title">Название опроса</string>
+    <string name="save">Сохранить</string>
+    <string name="question">Введите вопрос</string>
+
+</resources>
