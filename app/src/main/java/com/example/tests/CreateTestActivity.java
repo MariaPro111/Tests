@@ -34,17 +34,13 @@ public class CreateTestActivity extends AppCompatActivity {
                 SQLiteDatabase database = testsdb.getWritableDatabase();
                 ContentValues contentValues = new ContentValues();
                 contentValues.put(TestsDataBase.TESTS_TITLE, title);
-                database.insert(TestsDataBase.TESTS, null, contentValues);
-
-                Cursor c=database.rawQuery("SELECT MAX(_ID) as max_id FROM tests", null);
-                int idIndex = c.getColumnIndex("max_id");
-                database.close();
+                Long idIndex = database.insert(TestsDataBase.TESTS, null, contentValues);
 
 
 
                 Intent intent = new Intent();
                 intent.setClass(CreateTestActivity.this, AddQuestionActivity.class);
-                intent.putExtra("testid", idIndex);
+                intent.putExtra("testid", idIndex.intValue());
                 startActivity(intent);
 
             }
