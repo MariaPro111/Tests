@@ -58,11 +58,15 @@ public class CreateAnswerActivity extends AppCompatActivity {
                 contentValues3.put(TestsDataBase.QUESTION_ID, id);
                 database.insert(TestsDataBase.ANSWERS, null, contentValues3);
 
+                Cursor c=database.rawQuery("SELECT MAX(_ID) as max_id FROM tests", null);
+                int idIndex = c.getColumnIndex("max_id");
+
 
                 database.close();
 
                 Intent intent = new Intent();
                 intent.setClass(CreateAnswerActivity.this, AddQuestionActivity.class);
+                intent.putExtra("testid", idIndex);
                 startActivity(intent);
 
             }

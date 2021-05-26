@@ -66,16 +66,6 @@ public class TestsActivity extends AppCompatActivity {
 
         return tests;
 
-//        List<Test> tests = DataUtils.getInstance().getTests();
-//       ArrayAdapter<Test> adapter = new ArrayAdapter<Test>(this, android.R.layout.simple_list_item_1, tests);
-//        listView.setAdapter(adapter);
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                final Intent intent = new Intent(getApplicationContext(), QuestionsActivity.class);
-//                startActivity(intent);
-//            }
-//        });
 
 
     }
@@ -89,7 +79,6 @@ public class TestsActivity extends AppCompatActivity {
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
             Test test = getItem(position);
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-           // convertView = inflater.inflate(R.layout.activity_tests, null);
             convertView = inflater.inflate(R.layout.test_item, null);
             TextView title = convertView.findViewById(R.id.title);
             title.setText(test.getTitle());

@@ -9,6 +9,12 @@ public class Question implements Serializable {
     private String question;
     private List<Answer> answers = new ArrayList<>();
 
+     public Question(Long id, String question){
+        this.id = id;
+        this.question=question;
+    }
+    
+    
     public Long getId() {
         return id;
     }
