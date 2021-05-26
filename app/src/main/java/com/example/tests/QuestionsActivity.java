@@ -1,19 +1,28 @@
 package com.example.tests;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionsActivity extends AppCompatActivity {
     ListView listView;
+    Long testId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,8 +30,13 @@ public class QuestionsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_questions);
 
         listView = findViewById(R.id.questions);
-//        Test test = (Test)getIntent().getExtras().get("test");
-//        long id=test.getId();
+        // проверяем, что вызывающий интент передал нам в параметрах объект Test
+        if (getIntent() != null && getIntent().getExtras() != null && getIntent().getExtras().containsKey("test")) {
+            Test test = (Test) getIntent().getExtras().get("test");
+            testId = test.getId();
+        } else {
+            testId = null;
+        }
 
 
         List<Question> questions = generateQuestions();
@@ -38,14 +52,21 @@ public class QuestionsActivity extends AppCompatActivity {
             }
         });
     }
+
     private List<Question> generateQuestions() {
         List<Question> questions = new ArrayList<>();
 
         TestsDataBase testsdb=new TestsDataBase(this);
 
         SQLiteDatabase database=testsdb.getWritableDatabase();
-
-        Cursor c =database.rawQuery("select _id, question, test_id from questions", null);
+        Cursor c;
+        if (testId != null) {
+            // если testId передали из вызывающей активити, выбираем только вопросы, относящиеся к тесту
+            c = database.rawQuery("select _id, question, test_id from questions where test_id = " + testId , null);
+        } else {
+            // иначе выбираем все вопросы
+            c = database.rawQuery("select _id, question, test_id from questions where test_id = " + testId , null);
+        }
         int questionIndex = c.getColumnIndex("question");
         int idIndex = c.getColumnIndex("_id");
         int test_idIndex=c.getColumnIndex("test_id");
